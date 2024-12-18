@@ -1,4 +1,3 @@
-const useCustomHook = () => {
-    return {}
-}
+const useCustomHook = () => ({});
+
 export default useCustomHook;
