@@ -1,6 +1,7 @@
 import { NavigationContainer } from '@react-navigation/native';
 import { createNativeStackNavigator } from '@react-navigation/native-stack';
 import { QueryClientProvider } from '@tanstack/react-query';
+import SaveCard from 'components/SaveCard';
 import PokemonDetailsScreen from 'screens/Pokemon/PokemonDetailsScreen';
 import PokemonListScreen from 'screens/Pokemon/PokemonListScreen';
 import { queryClient } from 'services/queryClient';
@@ -24,7 +25,10 @@ const MainNavigator = () => (
         <PokemonStack.Screen
           name="PokemonDetails"
           component={PokemonDetailsScreen}
-          options={({ route }) => ({ title: route.params.name })}
+          options={({ route }) => ({
+            title: route.params.name,
+            headerRight: () => <SaveCard cardId={route.params.id} />,
+          })}
         />
       </PokemonStack.Navigator>
     </NavigationContainer>
