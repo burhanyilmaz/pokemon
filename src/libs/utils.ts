@@ -1,4 +1,6 @@
-import { Insets } from 'react-native';
+import { Dimensions, Insets } from 'react-native';
+
+export const { width, height } = Dimensions.get('window');
 
 export const getHitSlop = (
   params: Insets & { value?: number } = {

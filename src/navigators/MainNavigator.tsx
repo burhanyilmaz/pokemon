@@ -1,22 +1,34 @@
 import { NavigationContainer } from '@react-navigation/native';
 import { createNativeStackNavigator } from '@react-navigation/native-stack';
+import { QueryClientProvider } from '@tanstack/react-query';
 import PokemonDetailsScreen from 'screens/Pokemon/PokemonDetailsScreen';
 import PokemonListScreen from 'screens/Pokemon/PokemonListScreen';
+import { queryClient } from 'services/queryClient';
 
-type PokemonStackParamList = {
+export type PokemonStackParamList = {
   PokemonList: undefined;
-  PokemonDetails: undefined;
+  PokemonDetails: { id: string; name: string };
 };
 
 const PokemonStack = createNativeStackNavigator<PokemonStackParamList>();
 
 const MainNavigator = () => (
-  <NavigationContainer>
-    <PokemonStack.Navigator>
-      <PokemonStack.Screen name="PokemonList" component={PokemonListScreen} />
-      <PokemonStack.Screen name="PokemonDetails" component={PokemonDetailsScreen} />
-    </PokemonStack.Navigator>
-  </NavigationContainer>
+  <QueryClientProvider client={queryClient}>
+    <NavigationContainer>
+      <PokemonStack.Navigator>
+        <PokemonStack.Screen
+          name="PokemonList"
+          component={PokemonListScreen}
+          options={{ title: 'Pokemon List' }}
+        />
+        <PokemonStack.Screen
+          name="PokemonDetails"
+          component={PokemonDetailsScreen}
+          options={({ route }) => ({ title: route.params.name })}
+        />
+      </PokemonStack.Navigator>
+    </NavigationContainer>
+  </QueryClientProvider>
 );
 
 export default MainNavigator;
