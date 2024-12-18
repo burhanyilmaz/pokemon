@@ -1,6 +1,6 @@
-import { keepPreviousData, useInfiniteQuery } from '@tanstack/react-query';
-import { PokemonCardResponseType } from 'types/PokemonCardTypes';
-import { getPaginatedPokemonCards } from './Api';
+import { keepPreviousData, useInfiniteQuery, useQuery } from '@tanstack/react-query';
+import { PokemonCardResponseType, PokemonCardType } from 'types/PokemonCardTypes';
+import { getPaginatedPokemonCards, getPokemonCard } from './Api';
 import { useMemo } from 'react';
 
 export const usePokemonCards = () => {
@@ -18,3 +18,10 @@ export const usePokemonCards = () => {
 
   return { fetchNextPage, isLoading, refetch, pokemonCards, isRefetching };
 };
+
+export const usePokemonCard = (id: string) =>
+  useQuery<PokemonCardType>({
+    enabled: !!id,
+    queryKey: ['pokemonCard', id],
+    queryFn: async () => (await getPokemonCard(id)).data,
+  });
