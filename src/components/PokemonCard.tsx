@@ -13,7 +13,7 @@ export const PokemonCardImageHeight = (width - 32) / 1.5;
 export const PokemonCardHeight = PokemonCardImageHeight + 24;
 
 const PokemonCard = ({ pokemon, onPress }: PokemonCardProps) => (
-  <Pressable onPress={onPress}>
+  <Pressable onPress={onPress} testID="pokemonCard">
     {({ pressed }) => (
       <View style={[styles.container, pressed && { opacity: 0.5 }]}>
         <Image resizeMode="contain" source={{ uri: pokemon.images.small }} style={styles.image} />

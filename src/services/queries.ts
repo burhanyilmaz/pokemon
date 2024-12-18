@@ -4,7 +4,7 @@ import { getPaginatedPokemonCards, getPokemonCard } from './Api';
 import { useMemo } from 'react';
 
 export const usePokemonCards = () => {
-  const { fetchNextPage, isLoading, refetch, data, isRefetching } =
+  const { fetchNextPage, isLoading, refetch, data, isRefetching, isSuccess } =
     useInfiniteQuery<PokemonCardResponseType>({
       initialPageParam: 1,
       queryKey: ['pokemonCards'],
@@ -16,7 +16,7 @@ export const usePokemonCards = () => {
 
   const pokemonCards = useMemo(() => data?.pages.map(page => page.data).flat(1) || [], [data]);
 
-  return { fetchNextPage, isLoading, refetch, pokemonCards, isRefetching };
+  return { fetchNextPage, isLoading, refetch, pokemonCards, isRefetching, isSuccess };
 };
 
 export const usePokemonCard = (id: string) =>

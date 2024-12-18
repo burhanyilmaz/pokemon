@@ -27,6 +27,7 @@ const PokemonListScreen = () => {
       <FlashList
         numColumns={2}
         data={pokemonCards}
+        testID="pokemonCardList"
         renderItem={renderItem}
         onEndReachedThreshold={1.2}
         onEndReached={fetchNextPage}
